@@ -1,0 +1,3 @@
+/home/matthew/Network/cmake-build-debug/CMakeFiles/Network.dir
+/home/matthew/Network/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/matthew/Network/cmake-build-debug/CMakeFiles/rebuild_cache.dir
