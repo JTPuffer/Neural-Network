@@ -2,7 +2,7 @@
 // Created by matthew on 5/29/24.
 //
 
-#include "Layer.h"
+#include "../header/Layer.h"
 
 Layer::Layer(int neurons, const std::function<double(double)>& activationFunction, int seed)
         : neurons(neurons), activationFunction(activationFunction), seed(seed), first(true) {}

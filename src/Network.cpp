@@ -2,7 +2,7 @@
 // Created by matthew on 5/29/24.
 //
 
-#include "Network.h"
+#include "../header/Network.h"
 
 
 Network::Network(Layer one,Layer two) {

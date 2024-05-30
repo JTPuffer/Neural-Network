@@ -6,7 +6,11 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(Network
         src/main.cpp
         src/Layer.cpp
-        src/Layer.h
-        src/Math.h
+        header/Layer.h
+        header/Math.h
         src/Network.cpp
-        src/Network.h)
+        header/Network.h
+        src/DataReader.cpp
+        header/DataReader.h)
+
+file(COPY data/numbers DESTINATION ${CMAKE_BINARY_DIR})
