@@ -73,6 +73,24 @@ build CMakeFiles/Network.dir/src/DataReader.cpp.o: CXX_COMPILER__Network_unscann
   OBJECT_DIR = CMakeFiles/Network.dir
   OBJECT_FILE_DIR = CMakeFiles/Network.dir/src
 
+build CMakeFiles/Network.dir/src/Operations/WeightMultiply.cpp.o: CXX_COMPILER__Network_unscanned_Debug /home/matthew/Network/src/Operations/WeightMultiply.cpp || cmake_object_order_depends_target_Network
+  DEP_FILE = CMakeFiles/Network.dir/src/Operations/WeightMultiply.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Network.dir
+  OBJECT_FILE_DIR = CMakeFiles/Network.dir/src/Operations
+
+build CMakeFiles/Network.dir/src/Operations/BiasAdd.cpp.o: CXX_COMPILER__Network_unscanned_Debug /home/matthew/Network/src/Operations/BiasAdd.cpp || cmake_object_order_depends_target_Network
+  DEP_FILE = CMakeFiles/Network.dir/src/Operations/BiasAdd.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Network.dir
+  OBJECT_FILE_DIR = CMakeFiles/Network.dir/src/Operations
+
+build CMakeFiles/Network.dir/src/Operations/Sigmoid.cpp.o: CXX_COMPILER__Network_unscanned_Debug /home/matthew/Network/src/Operations/Sigmoid.cpp || cmake_object_order_depends_target_Network
+  DEP_FILE = CMakeFiles/Network.dir/src/Operations/Sigmoid.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Network.dir
+  OBJECT_FILE_DIR = CMakeFiles/Network.dir/src/Operations
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Network
@@ -81,7 +99,7 @@ build CMakeFiles/Network.dir/src/DataReader.cpp.o: CXX_COMPILER__Network_unscann
 #############################################
 # Link the executable Network
 
-build Network: CXX_EXECUTABLE_LINKER__Network_Debug CMakeFiles/Network.dir/src/main.cpp.o CMakeFiles/Network.dir/src/Layer.cpp.o CMakeFiles/Network.dir/src/Network.cpp.o CMakeFiles/Network.dir/src/DataReader.cpp.o
+build Network: CXX_EXECUTABLE_LINKER__Network_Debug CMakeFiles/Network.dir/src/main.cpp.o CMakeFiles/Network.dir/src/Layer.cpp.o CMakeFiles/Network.dir/src/Network.cpp.o CMakeFiles/Network.dir/src/DataReader.cpp.o CMakeFiles/Network.dir/src/Operations/WeightMultiply.cpp.o CMakeFiles/Network.dir/src/Operations/BiasAdd.cpp.o CMakeFiles/Network.dir/src/Operations/Sigmoid.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/Network.dir
   POST_BUILD = :

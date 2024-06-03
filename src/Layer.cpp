@@ -3,11 +3,23 @@
 //
 
 #include "../header/Layer.h"
+#include "../header/Operations/BiasAdd.h"
+#include "../header/Operations/Sigmoid.h"
+#include "../header/Operations/WeightMultiply.h"
 
-Layer::Layer(int neurons, const std::function<double(double)>& activationFunction, int seed)
-        : neurons(neurons), activationFunction(activationFunction), seed(seed), first(true) {}
+Layer::Layer(int neurons, int seed)
+        : neurons(neurons), seed(seed), first(true) {
 
-Layer::~Layer() = default;
+}
+
+Layer::~Layer() {
+    for(Operation* o : operations){
+        delete o;
+    }
+
+};
+
+
 
 
 void Layer::setupLayer(const Maths::MathVector<double>& input) {
@@ -21,12 +33,15 @@ void Layer::setupLayer(const Maths::MathVector<double>& input) {
             weights(i, j) = dis(gen);
         }
     }
-
     // Initialize bias as a MathVector
     bias = Maths::Vector(neurons);
     for (size_t i = 0; i < neurons; ++i) {
         bias[i] = dis(gen);
     }
+
+    this->operations.push_back(new WeightMultiply(weights));
+    this->operations.push_back(new BiasAdd(bias));
+    this->operations.push_back(new Sigmoid());
 }
 
 Maths::MathVector<double> Layer::forward(Maths::Vector& input) {
@@ -35,13 +50,13 @@ Maths::MathVector<double> Layer::forward(Maths::Vector& input) {
         this->setupLayer(input);
     }
 
-    Maths::Vector output = Maths::dotProduct(weights,input);
-    output = output + bias;
-    std::transform(output.begin(), output.end(), output.begin(), activationFunction);
 
 
+    for(Operation* o : operations){
+        o->forwould(input);
+    }
 
-    return output;
+    return input;
 }
 
 void Layer::backward(const std::vector<Layer>& input) {

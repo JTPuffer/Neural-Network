@@ -11,6 +11,14 @@ add_executable(Network
         src/Network.cpp
         header/Network.h
         src/DataReader.cpp
-        header/DataReader.h)
+        header/DataReader.h
+        header/Operations/Operation.h
+        src/Operations/WeightMultiply.cpp
+        header/Operations/WeightMultiply.h
+        src/Operations/BiasAdd.cpp
+        header/Operations/BiasAdd.h
+        src/Operations/Sigmoid.cpp
+        header/Operations/Sigmoid.h
+)
 
 file(COPY data/numbers DESTINATION ${CMAKE_BINARY_DIR})

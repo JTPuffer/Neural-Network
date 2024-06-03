@@ -10,16 +10,17 @@ class Network {
 
 private:
     std::vector<Layer> layers;
+
 public:
 
-    explicit Network(Layer one,Layer two);
+    explicit Network(std::vector<Layer> layers);
 
 
     virtual ~Network() = default;
 
     Maths::Vector forward(const Maths::Vector& vars);
     void backward();
-    void train(std::vector<float> input , std::vector<float> target);
+    void train(std::vector<Maths::Vector> input , std::vector<float> target);
 
 
 

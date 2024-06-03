@@ -2,12 +2,12 @@
 // Created by matthew on 5/29/24.
 //
 
+#include <utility>
+
 #include "../header/Network.h"
 
 
-Network::Network(Layer one,Layer two) {
-    this->layers.push_back(one);
-    this->layers.push_back(two);
+Network::Network(std::vector<Layer> layers) : layers(std::move(layers)){
 }
 
 Maths::Vector Network::forward(const Maths::Vector& vars) {
@@ -23,9 +23,12 @@ void Network::backward() {
 
 }
 
-void Network::train(std::vector<float> input, std::vector<float> target) {
+void Network::train(std::vector<Maths::Vector> input, std::vector<float> target) {
+    Maths::Vector predictions = forward(input[0]);
 
 }
+
+
 
 
 

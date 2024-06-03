@@ -7,7 +7,64 @@
 #define Maths_H
 
 namespace Maths {
-    template <typename T>class MathsVector;
+
+    template<typename T>
+    class MathVector : public std::vector<T> {
+    public:
+        using std::vector<T>::vector; // Inherit constructors
+
+        // Addition
+        MathVector<T> operator+(const MathVector<T>& other) const {
+            if (this->size() != other.size()) {
+                throw std::invalid_argument("Vectors must be of the same size");
+            }
+            MathVector<T> result(this->size());
+            for (size_t i = 0; i < this->size(); ++i) {
+                result[i] = (*this)[i] + other[i];
+            }
+            return result;
+        }
+        MathVector<T>& operator+=(const MathVector<T> &other) {
+            if (this->size() != other.size()) {
+                throw std::invalid_argument("Vectors must be of the same size");
+            }
+
+            for (size_t i = 0; i < this->size(); ++i) {
+                (*this)[i] = (*this)[i] + other[i];
+            }
+            return *this;
+        }
+        // Subtraction
+        MathVector<T> operator-(const MathVector<T>& other) const {
+            if (this->size() != other.size()) {
+                throw std::invalid_argument("Vectors must be of the same size");
+            }
+            MathVector<T> result(this->size());
+            for (size_t i = 0; i < this->size(); ++i) {
+                result[i] = (*this)[i] - other[i];
+            }
+            return result;
+        }
+
+        // Scalar multiplication
+        MathVector<T> operator*(const T& scalar) const {
+            MathVector<T> result(this->size());
+            for (size_t i = 0; i < this->size(); ++i) {
+                result[i] = (*this)[i] * scalar;
+            }
+            return result;
+        }
+
+
+
+        // Print the vector
+        void print() const {
+            for (const auto& value : *this) {
+                std::cout << value << " ";
+            }
+            std::cout << std::endl;
+        }
+    };
 
     template<typename T>
     class MathsMatrix {
@@ -88,11 +145,11 @@ namespace Maths {
             return result;
         }
 
-        MathsVector<T> operator*(const MathsVector<T>& vec) const {
+        MathVector<T> operator*(const MathVector<T>& vec) const {
             if (cols != vec.size()) {
                 throw std::invalid_argument("Matrix columns must match vector size for multiplication");
             }
-            MathsVector<T> result(rows, 0);
+            MathVector<T> result(rows, 0);
             for (size_t i = 0; i < rows; ++i) {
                 for (size_t j = 0; j < cols; ++j) {
                     result[i] += data[i][j] * vec[j];
@@ -100,6 +157,7 @@ namespace Maths {
             }
             return result;
         }
+
 
         // Transpose
         [[nodiscard]] MathsMatrix transpose() const {
@@ -131,54 +189,7 @@ namespace Maths {
         }
     };
 
-    template<typename T>
-    class MathVector : public std::vector<T> {
-    public:
-        using std::vector<T>::vector; // Inherit constructors
 
-        // Addition
-        MathVector<T> operator+(const MathVector<T>& other) const {
-            if (this->size() != other.size()) {
-                throw std::invalid_argument("Vectors must be of the same size");
-            }
-            MathVector<T> result(this->size());
-            for (size_t i = 0; i < this->size(); ++i) {
-                result[i] = (*this)[i] + other[i];
-            }
-            return result;
-        }
-
-        // Subtraction
-        MathVector<T> operator-(const MathVector<T>& other) const {
-            if (this->size() != other.size()) {
-                throw std::invalid_argument("Vectors must be of the same size");
-            }
-            MathVector<T> result(this->size());
-            for (size_t i = 0; i < this->size(); ++i) {
-                result[i] = (*this)[i] - other[i];
-            }
-            return result;
-        }
-
-        // Scalar multiplication
-        MathVector<T> operator*(const T& scalar) const {
-            MathVector<T> result(this->size());
-            for (size_t i = 0; i < this->size(); ++i) {
-                result[i] = (*this)[i] * scalar;
-            }
-            return result;
-        }
-
-
-
-        // Print the vector
-        void print() const {
-            for (const auto& value : *this) {
-                std::cout << value << " ";
-            }
-            std::cout << std::endl;
-        }
-    };
 
     inline MathVector<double> dotProduct(const Maths::MathsMatrix<double>& one, const Maths::MathVector<double>& two) {
         if (one.getCols() != two.size()) {
