@@ -54,7 +54,17 @@ namespace Maths {
             }
             return result;
         }
+        MathVector<T> operator*(const MathVector<T> &other) const {
+            if (this->size() != other.size()) {
+                throw std::invalid_argument("Vectors must be of the same size");
+            }
 
+            MathVector<T> result = *this;
+            for (size_t i = 0; i < this->size(); ++i) {
+                result[i] = (*this)[i] * other[i];
+            }
+            return result;
+        }
 
 
         // Print the vector
@@ -204,6 +214,18 @@ namespace Maths {
                 sum += one(i, j) * two[j];
             }
             result[i] = sum;
+        }
+        return result;
+    }
+    template<typename T>
+    inline MathsMatrix<T> outerProduct(const MathVector<T>& vec1, const MathVector<T>& vec2) {
+        size_t rows = vec1.size();
+        size_t cols = vec2.size();
+        MathsMatrix<T> result(rows, cols);
+        for (size_t i = 0; i < rows; ++i) {
+            for (size_t j = 0; j < cols; ++j) {
+                result(i, j) = vec1[i] * vec2[j];
+            }
         }
         return result;
     }

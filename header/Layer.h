@@ -24,7 +24,8 @@ public:
 
     void setupLayer(const Maths::Vector& input);
     Maths::MathVector<double> forward(Maths::Vector& input);
-    void backward(const std::vector<Layer>& input);
+    Maths::Vector backward(Maths::Vector &input);
+    void train(double learningRate);
 };
 
 #endif //NETWORK_LAYER_H

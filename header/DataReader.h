@@ -11,8 +11,8 @@
 #include <vector>
 #include <iostream>
 #include "Math.h"
-typedef std::pair<Maths::Vector,int> Image;
 
+typedef std::pair<std::vector<Maths::Vector>, std::vector<Maths::Vector>> dataset;
 class DataReader {
 private:
     struct __attribute__ ((packed)) imageMeta {
@@ -44,8 +44,8 @@ private:
         meta.number_of_items = swapEndian(meta.number_of_items);
     }
 public:
-    typedef std::vector<Image> dataset;
-    static std::vector<Image> readData(const std::string& image,const std::string& label);
+
+    static dataset readData(const std::string& image,const std::string& label);
 
 
 };

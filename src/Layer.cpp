@@ -24,7 +24,10 @@ Layer::~Layer() {
 
 void Layer::setupLayer(const Maths::MathVector<double>& input) {
     std::mt19937 gen(this->seed);
-    std::uniform_real_distribution<> dis(0.0, 1.0);
+
+    // Xavier initialization for weights
+    double xavier_scale = std::sqrt(2.0 / (input.size() + neurons));
+    std::normal_distribution<> dis(0.0, xavier_scale);
 
     // Initialize weights as a Matrix
     weights = Maths::Matrix(neurons, input.size());
@@ -33,6 +36,7 @@ void Layer::setupLayer(const Maths::MathVector<double>& input) {
             weights(i, j) = dis(gen);
         }
     }
+
     // Initialize bias as a MathVector
     bias = Maths::Vector(neurons);
     for (size_t i = 0; i < neurons; ++i) {
@@ -42,6 +46,7 @@ void Layer::setupLayer(const Maths::MathVector<double>& input) {
     this->operations.push_back(new WeightMultiply(weights));
     this->operations.push_back(new BiasAdd(bias));
     this->operations.push_back(new Sigmoid());
+
 }
 
 Maths::MathVector<double> Layer::forward(Maths::Vector& input) {
@@ -59,8 +64,18 @@ Maths::MathVector<double> Layer::forward(Maths::Vector& input) {
     return input;
 }
 
-void Layer::backward(const std::vector<Layer>& input) {
-    // Implement the backward pass logic as needed
+Maths::Vector Layer::backward(Maths::Vector &input) {
+
+    for (auto it = operations.rbegin(); it != operations.rend(); ++it) {
+        input = (*it)->backward(input);
+    }
+    return input;
+}
+
+void Layer::train(double learningRate) {
+    for(Operation* o : operations){
+        o->train(learningRate);
+    }
 }
 
 

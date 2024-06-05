@@ -3,6 +3,8 @@
 //
 #include <vector>
 #include "Layer.h"
+#include "Operations/Loss.h"
+
 #ifndef NETWORK_NETWORK_H
 #define NETWORK_NETWORK_H
 
@@ -19,8 +21,8 @@ public:
     virtual ~Network() = default;
 
     Maths::Vector forward(const Maths::Vector& vars);
-    void backward();
-    void train(std::vector<Maths::Vector> input , std::vector<float> target);
+    void backward(Maths::MathVector<double> vector);
+    void train(std::vector<Maths::Vector>& input, std::vector<Maths::Vector>& target, Loss loss);
 
 
 

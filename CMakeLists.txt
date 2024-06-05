@@ -19,6 +19,9 @@ add_executable(Network
         header/Operations/BiasAdd.h
         src/Operations/Sigmoid.cpp
         header/Operations/Sigmoid.h
+        src/Operations/Loss.cpp
+        header/Operations/Loss.h
+        src/Operations/Operation.cpp
 )
 
 file(COPY data/numbers DESTINATION ${CMAKE_BINARY_DIR})

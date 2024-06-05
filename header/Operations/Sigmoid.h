@@ -12,8 +12,14 @@ private:
 
 public:
     void forwould(Maths::MathVector<double> &input) override;
+
     Maths::MathVector<double> backward(Maths::MathVector<double> &input) override;
 
+    void train(double learningRate) override;
+
+protected:
+    void derivative_of_cost(Maths::MathVector<double> &input) override;
+    Maths::MathVector<double> derivative_of_input(Maths::MathVector<double> &input) override;
 };
 
 
