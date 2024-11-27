@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.1)
 project(Network)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -22,6 +22,8 @@ add_executable(Network
         src/Operations/Loss.cpp
         header/Operations/Loss.h
         src/Operations/Operation.cpp
+        src/Optimizer.cpp
+        header/Optimizer.h
 )
 
 file(COPY data/numbers DESTINATION ${CMAKE_BINARY_DIR})

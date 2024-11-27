@@ -12,7 +12,7 @@
 #include <iostream>
 #include "Math.h"
 
-typedef std::pair<std::vector<Maths::Vector>, std::vector<Maths::Vector>> dataset;
+typedef std::vector<std::pair<Maths::Vector, Maths::Vector>> dataset;
 class DataReader {
 private:
     struct __attribute__ ((packed)) imageMeta {
@@ -43,10 +43,17 @@ private:
         meta.magic_number = swapEndian(meta.magic_number);
         meta.number_of_items = swapEndian(meta.number_of_items);
     }
+
+    std::ifstream imagesFile;
+    std::ifstream labelsFile;
+    imageMeta imageMetadata{};
+    labelMeta labelMetadata{};
+    uint32_t current_image_index;
+    uint32_t current_label_index;
 public:
 
-    static dataset readData(const std::string& image,const std::string& label);
-
+    DataReader(const std::string& image,const std::string& label);
+    dataset getBatch(size_t batch_size);
 
 };
 

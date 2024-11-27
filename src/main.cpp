@@ -6,14 +6,14 @@
 
 int main(){
 
-    dataset dataset = DataReader::readData("numbers/train-images.idx3-ubyte","numbers/train-labels.idx1-ubyte");
+    DataReader dataReader = DataReader("numbers/train-images.idx3-ubyte","numbers/train-labels.idx1-ubyte");
 
 
 
-    Network bob = Network({Layer(100, 534),Layer(10, 10)} );
+    Network bob = Network({Layer(89, 534),Layer(10, 10)} );
 
 
-    bob.train(dataset.first,dataset.second,Loss());
+    bob.train(dataReader, 200, Loss());
     return 0;
 }
 

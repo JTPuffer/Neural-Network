@@ -4,6 +4,7 @@
 #include <vector>
 #include "Layer.h"
 #include "Operations/Loss.h"
+#include "DataReader.h"
 
 #ifndef NETWORK_NETWORK_H
 #define NETWORK_NETWORK_H
@@ -22,7 +23,7 @@ public:
 
     Maths::Vector forward(const Maths::Vector& vars);
     void backward(Maths::MathVector<double> vector);
-    void train(std::vector<Maths::Vector>& input, std::vector<Maths::Vector>& target, Loss loss);
+    void train(DataReader& reader, size_t batch_size, const Loss& loss);
 
 
 

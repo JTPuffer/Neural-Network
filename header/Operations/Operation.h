@@ -6,9 +6,10 @@
 #define NETWORK_OPERATION_H
 
 #include "../Math.h"
-
+#include "../Optimizer.h"
 class Operation {
 protected:
+    //friend Optimizer;
     Maths::MathVector<double> input;
 
 public:
